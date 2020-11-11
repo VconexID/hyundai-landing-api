@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('change-password', [AuthController::class, 'changePassword']);
     Route::apiResource('examples', ExampleController::class)->except('index', 'show');
+    Route::post('upload', [UploadController::class, 'upload']);
 });
 Route::apiResource('examples', ExampleController::class)->only('index', 'show');
