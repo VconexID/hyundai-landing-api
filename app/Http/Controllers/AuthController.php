@@ -20,7 +20,7 @@ class AuthController extends Controller
     {
 
         if (!$token = Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['errors' => ['password' => ['Password Incorrect']]], 422);
         }
 
         return $this->respondWithToken($token);
