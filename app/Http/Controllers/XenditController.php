@@ -103,7 +103,7 @@ class XenditController extends Controller
     return response($response);
   }
 
-  public static function createInvoice(Request $request)
+  public  function createInvoice(Request $request)
   {
     // check ticket type
     $amount = $request->ticket_amount === 12 ? 50000 : 10000;
@@ -123,7 +123,7 @@ class XenditController extends Controller
     return $response->json();
   }
 
-  public static function getInvoice($id)
+  public  function getInvoice($id)
   {
 
     $response = Http::withBasicAuth($this->secret_api_key, '')->get($this->server_domain . '/v2/invoices/' . $id);
