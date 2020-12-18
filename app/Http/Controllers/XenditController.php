@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\App;
 
 
 class XenditController extends Controller
 {
   function __construct()
   {
-    $options['secret_api_key'] = env('XENDIT_API_KEY');
-    $this->server_domain = env('XENDIT_SERVER_DOMAIN');
-    $this->secret_api_key = $options['secret_api_key'];
+    // $environment = App::environment();
+    $this->secret_api_key = config('xendit.secret_key');
+    $this->server_domain = config('xendit.server_domain');
   }
 
   public function getBalance()
@@ -105,17 +106,15 @@ class XenditController extends Controller
 
   public  function createInvoice(Request $request)
   {
-    // check ticket type
-    $amount = $request->ticket_amount === 12 ? 50000 : 10000;
 
     $data = [
-      'external_id' => 'ap2li-ticket-' . time(),
+      'external_id' => 'xendit-test-' . time(),
       'payer_email' => $request->email,
-      'description' => 'AP2LI TICKET PAYMENT',
-      'amount' => $amount,
+      'description' => 'XENDIT LIVE TEST',
+      'amount' => $request->amount,
       'should_send_email' => true,
-      'success_redirect_url' => "https://ap2li.herokuapp.com/",
-      'failure_redirect_url' => "https://ap2li.herokuapp.com/"
+      'success_redirect_url' => "https://www.vconex.id/",
+      'failure_redirect_url' => "https://www.vconex.id/"
     ];
 
     $response = Http::withBasicAuth($this->secret_api_key, '')->post($this->server_domain . '/v2/invoices', $data);
@@ -127,6 +126,14 @@ class XenditController extends Controller
   {
 
     $response = Http::withBasicAuth($this->secret_api_key, '')->get($this->server_domain . '/v2/invoices/' . $id);
+
+    return $response->json();
+  }
+  
+  public  function getAllInvoice()
+  {
+
+    $response = Http::withBasicAuth($this->secret_api_key, '')->get($this->server_domain . '/v2/invoices');
 
     return $response->json();
   }
@@ -150,5 +157,28 @@ class XenditController extends Controller
     curl_close($curl);
 
     return response($response);
+  }
+  
+  //virtual account
+  public  function getAllBanks()
+  {
+
+    $response = Http::withBasicAuth($this->secret_api_key, '')->get($this->server_domain . '/available_virtual_account_banks');
+
+    return $response->json();
+  }
+  
+  public  function createVirtualAccount(Request $request)
+  {
+    // dd($request->all());
+    $data = [
+      'external_id' => 'xendit-test-' . time(),
+      'bank_code' => $request->bank_code,
+      'name' => $request->name,
+    ];
+
+    $response = Http::withBasicAuth($this->secret_api_key, '')->post($this->server_domain . '/callback_virtual_accounts', $data);
+
+    return $response->json();
   }
 }
