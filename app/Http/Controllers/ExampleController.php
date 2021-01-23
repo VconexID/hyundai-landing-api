@@ -17,7 +17,7 @@ class ExampleController extends Controller
     public function index(Request $request)
     {
         if ($request->get('search')) {
-            $data = Example::where('title', 'LIKE', '%' . $request->get('search') . '%')->orderBy('id', 'DESC')->get();
+            $data = Example::where('title', 'ILIKE', '%' . $request->get('search') . '%')->orderBy('id', 'DESC')->get();
         } else {
             $data = Example::orderBy('id', 'DESC')->paginate(10);
         }
