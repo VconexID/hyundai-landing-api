@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AncestorController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DescendantController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\XenditController;
@@ -26,6 +27,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('change-password', [AuthController::class, 'changePassword']);
     Route::apiResource('examples', ExampleController::class)->except('index', 'show');
     Route::apiResource('ancestors', AncestorController::class)->except('index', 'show');
+    Route::apiResource('descendants', DescendantController::class)->except('index', 'show');
     Route::post('upload', [UploadController::class, 'upload']);
 });
 
@@ -36,6 +38,10 @@ Route::apiResource('examples', ExampleController::class)->only('index', 'show');
 // ancestor
 Route::get('ancestors/all', [AncestorController::class, 'all']);
 Route::apiResource('ancestors', AncestorController::class)->only('index', 'show');
+
+// descendant
+Route::get('descendants/all', [DescendantController::class, 'all']);
+Route::apiResource('descendants', DescendantController::class)->only('index', 'show');
 
 Route::get('xendit/getBalance', [XenditController::class, 'getBalance']);
 Route::post('xendit/createInvoice', [XenditController::class, 'createInvoice']);

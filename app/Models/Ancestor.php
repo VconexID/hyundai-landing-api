@@ -10,4 +10,9 @@ class Ancestor extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'description', 'image'];
+
+    public function descendants()
+    {
+        return $this->hasMany('App\Models\Descendant');
+    }
 }
