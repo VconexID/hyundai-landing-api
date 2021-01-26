@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AncestorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\UploadController;
@@ -24,9 +25,17 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('change-password', [AuthController::class, 'changePassword']);
     Route::apiResource('examples', ExampleController::class)->except('index', 'show');
+    Route::apiResource('ancestors', AncestorController::class)->except('index', 'show');
     Route::post('upload', [UploadController::class, 'upload']);
 });
+
+// example
+Route::get('examples/all', [ExampleController::class, 'all']);
 Route::apiResource('examples', ExampleController::class)->only('index', 'show');
+
+// ancestor
+Route::get('ancestors/all', [AncestorController::class, 'all']);
+Route::apiResource('ancestors', AncestorController::class)->only('index', 'show');
 
 Route::get('xendit/getBalance', [XenditController::class, 'getBalance']);
 Route::post('xendit/createInvoice', [XenditController::class, 'createInvoice']);
