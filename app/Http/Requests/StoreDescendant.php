@@ -25,7 +25,7 @@ class StoreDescendant extends FormRequest
     {
         return [
             'content' => 'required|string|max:255',
-            'ancestor' => 'required|existed:ancestors,id',
+            'ancestor' => 'required|exists:ancestors,id',
         ];
     }
 }
