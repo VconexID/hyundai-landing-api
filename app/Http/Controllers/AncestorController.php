@@ -17,11 +17,13 @@ class AncestorController extends Controller
     public function index(Request $request)
     {
         if ($request->get('search')) {
-            $data = Ancestor::where('title', 'ILIKE', '%' . $request->get('search') . '%')
+            $data = Ancestor::with('descendants')
+                ->where('title', 'ILIKE', '%' . $request->get('search') . '%')
                 ->orderBy('id', 'DESC')
                 ->get();
         } else {
-            $data = Ancestor::orderBy('id', 'DESC')
+            $data = Ancestor::with('descendants')
+                ->orderBy('id', 'DESC')
                 ->paginate(10);
         }
 
@@ -35,7 +37,7 @@ class AncestorController extends Controller
      */
     public function all()
     {
-        $data = Ancestor::get();
+        $data = Ancestor::with('descendants')->get();
 
         return response()->json($data);
     }
@@ -64,7 +66,8 @@ class AncestorController extends Controller
      */
     public function show(Ancestor $ancestor)
     {
-        $data = Ancestor::find($ancestor->id);
+        $data = Ancestor::with('descendants')
+            ->find($ancestor->id);
 
         return response()->json($data);
     }
