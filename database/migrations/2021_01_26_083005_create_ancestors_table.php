@@ -15,6 +15,8 @@ class CreateAncestorsTable extends Migration
     {
         Schema::create('ancestors', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('description');
             $table->timestamps();
         });
     }
