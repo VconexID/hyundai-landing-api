@@ -52,7 +52,7 @@ class DescendantController extends Controller
     {
         $data = Descendant::create([
             'content' => $request->content,
-            'ancestor_id' => $request->ancestor_id,
+            'ancestor_id' => $request->ancestor,
         ]);
 
         return response()->json($data);
@@ -83,7 +83,7 @@ class DescendantController extends Controller
     {
         $updateData = Descendant::where('id', $descendant->id)->update([
             'content' => $request->content,
-            'ancestor_id' => $request->ancestor_id,
+            'ancestor_id' => $request->ancestor,
         ]);
 
         $data = Descendant::find($descendant->id);
