@@ -25,7 +25,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('change-password', [AuthController::class, 'changePassword']);
-    Route::apiResource('examples', ExampleController::class)->except('index', 'show');
+    // Route::apiResource('examples', ExampleController::class)->except('index', 'show');
     Route::apiResource('ancestors', AncestorController::class)->except('index', 'show');
     Route::apiResource('descendants', DescendantController::class)->except('index', 'show');
     Route::post('upload', [UploadController::class, 'upload']);
@@ -33,7 +33,7 @@ Route::middleware('auth:api')->group(function () {
 
 // example
 Route::get('examples/all', [ExampleController::class, 'all']);
-Route::apiResource('examples', ExampleController::class)->only('index', 'show');
+Route::apiResource('examples', ExampleController::class);
 
 // ancestor
 Route::get('ancestors/all', [AncestorController::class, 'all']);
