@@ -25,8 +25,7 @@ class StoreExample extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'image' => 'required|image|max:20480',
+            'description' => 'required',
         ];
     }
 }

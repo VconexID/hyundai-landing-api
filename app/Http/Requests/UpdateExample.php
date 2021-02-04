@@ -25,8 +25,7 @@ class UpdateExample extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'image' => 'nullable|image|max:20480',
+            'description' => 'required',
         ];
     }
 }

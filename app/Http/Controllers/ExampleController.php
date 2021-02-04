@@ -45,12 +45,10 @@ class ExampleController extends Controller
      */
     public function store(StoreExample $request)
     {
-        $response = ImageController::uploadImage($request->image, '/example')->success->url;
 
         $data = Example::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $response
         ]);
 
         return response()->json($data);
@@ -76,16 +74,10 @@ class ExampleController extends Controller
      */
     public function update(UpdateExample $request, Example $example)
     {
-        if ($request->image) {
-            $response = ImageController::uploadImage($request->image, '/example')->success->url;
-        } else {
-            $response = $example->image;
-        }
-
-        $updateData = Example::where('id', $example->id)->update([
+      
+        Example::where('id', $example->id)->update([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $response
         ]);
 
         $data = Example::find($example->id);

@@ -18,8 +18,8 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin',
             'role' => 0,
-            'email' => 'admin@vconex.id',
-            'password' => Hash::make('admin123')
+            'email' => 'rogerdimas@mail.com',
+            'password' => Hash::make('rogerdimas')
         ]);
     }
 }
