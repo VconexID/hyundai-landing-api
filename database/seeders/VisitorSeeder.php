@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class AncestorSeeder extends Seeder
+class VisitorSeeder extends Seeder
 {
     /**
      * Run the database seeds.

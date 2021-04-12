@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Descendant;
+use App\Models\Visitor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DescendantFactory extends Factory
+class VisitorFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Descendant::class;
+    protected $model = Visitor::class;
 
     /**
      * Define the model's default state.
