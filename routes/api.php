@@ -25,3 +25,8 @@ Route::middleware('auth:api')->group(function () {
 
 // example
 Route::apiResource('visitors', VisitorController::class); 
+Route::get('/mailable', function () {
+    $visitor = App\Models\Visitor::find(1);
+
+    return new App\Mail\RegisterShipped($visitor);
+});

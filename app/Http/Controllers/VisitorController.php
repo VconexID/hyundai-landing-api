@@ -6,6 +6,8 @@ use App\Models\Visitor;
 use Illuminate\Http\Request;
 use App\Traits\ResponseTrait;
 use App\Http\Requests\StoreVisitor;
+use App\Mail\RegisterShipped;
+use Illuminate\Support\Facades\Mail;
 
 class VisitorController extends Controller
 {
@@ -27,6 +29,8 @@ class VisitorController extends Controller
       'bring_guest' => $request->bring_guest,
       'size' => $request->size,
     ]);
+
+    Mail::to($request->email)->send(new RegisterShipped($data));
 
     return $this->returnData($data);
   }
