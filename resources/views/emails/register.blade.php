@@ -2,7 +2,7 @@
 # Selamat {{ $visitor->full_name }}
 
 Email dengan nama <b>{{ $visitor->email }}</b>,<br>
-Telah berhasil terdaftar di Hyundai RSVP
+Telah berhasil bergabung di Hyundai Community
 
 Terima Kasih,<br>
 {{ config('app.name') }}

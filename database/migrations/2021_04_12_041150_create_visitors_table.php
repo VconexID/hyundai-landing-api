@@ -18,8 +18,10 @@ class CreateVisitorsTable extends Migration
             $table->string('full_name');
             $table->string('email')->unique();
             $table->string('phone_number');
-            $table->integer('bring_guest');
-            $table->enum('size', ['S', 'M', 'L', 'XL']);
+            $table->foreignId('district_id')->constrained()->onDelete('cascade');
+            $table->enum('car_type', ['Palisade','Kona Electric', 'Ioniq Electric', 'H-1', 'Santa Fe']);
+            $table->string('car_color');
+            $table->string('no_polisi');
             $table->timestamps();
         });
     }

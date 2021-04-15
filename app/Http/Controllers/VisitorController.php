@@ -26,8 +26,10 @@ class VisitorController extends Controller
       'full_name' => $request->full_name,
       'email' => $request->email,
       'phone_number' => $request->phone_number,
-      'bring_guest' => $request->bring_guest,
-      'size' => $request->size,
+      'car_type' => $request->car_type,
+      'car_color' => $request->car_color,
+      'no_polisi' => $request->no_polisi,
+      'district_id' => $request->district,
     ]);
 
     Mail::to($request->email)->send(new RegisterShipped($data));

@@ -27,8 +27,11 @@ class StoreVisitor extends FormRequest
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'phone_number' => 'required|min:10',
-            'bring_guest' => 'required|integer',
-            'size' => 'required|in:S,M,L,XL'
+            'province' => 'required|exists:districts,id',
+            'district' => 'required|exists:districts,id',
+            'car_type' => 'required|in:Palisade,Kona Electric,Ioniq Electric,H-1,Santa Fe',
+            'car_color' => 'required|string',
+            'no_polisi' => 'required|string',
         ];
     }
 }
